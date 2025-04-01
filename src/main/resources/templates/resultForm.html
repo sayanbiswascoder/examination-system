@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result Page</title>
+  <style>
+    /* General Body Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Container Styling with Landscape Sliding Animation */
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transform: translateX(-100%);
+      animation: slideInLandscape 1.5s ease-out forwards;
+    }
+
+    @keyframes slideInLandscape {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Heading */
+    h1 {
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 24px;
+    }
+
+    /* Input Styling */
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    input::placeholder {
+      color: #666;
+    }
+
+    select {
+      --webkit-appearance: none; /* For consistent dropdown styling */
+    }
+
+    /* Button Styling */
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      background: linear-gradient(90deg, #11998e, #38ef7d);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 5px 15px rgba(56, 239, 125, 0.5);
+    }
+
+  @media (max-width: 600px) {
+    .container {
+      width: auto;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Check Results</h1>
+    <div class="form-group">
+      <label for="name">Student Name</label>
+      <input type="text" id="name" placeholder="Enter your name">
+    </div>
+    <div class="form-group">
+      <label for="regNo">Registration Number</label>
+      <input type="text" id="regNo" placeholder="Enter your reg. number">
+    </div>
+    <div class="form-group">
+      <label for="semester">Semester</label>
+      <select id="semester">
+        <option value="">Select Semester</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+    </div>
+    <button onclick="submit()">Submit</button>
+  </div>
+</body>
+<script>
+  const submit = () => {
+    const name = document.getElementById('name').value;
+    const regNo = document.getElementById('regNo').value;
+    const semester = document.getElementById('semester').value;
+
+    if(regNo === '' && semester === '') return;
+
+    window.location.href = `/result?regno=${regNo}&semester=${semester}`;
+  }
+</script>
+</html>

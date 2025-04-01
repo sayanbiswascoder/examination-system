@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Question Portal</title>
+    
+  </head>
+  <style>
+    /* CSS Styles for Sliding Animation */
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    *::-webkit-scrollbar {
+      display: none;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      width: 100%;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0px;
+      animation: slideInDown 1s ease-out; /* Sliding animation */
+    }
+
+    header h1 {
+      margin: 10px;
+    }
+
+    main {
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      overflow-y: scroll;
+    }
+
+    #student-details {
+      padding: 20px;
+      padding-bottom: 0px;
+      color: #ffffff;
+      animation: slideInUp 1s ease-out;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      text-align: left;
+      width: 100%;
+      margin: auto;
+    }
+
+    #student-details p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    h1 {
+      color: #ffffff;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 24px;
+      display: inline;
+    }
+
+    #question-container {
+      padding: 10px;
+      padding-top: 0px;
+      text-align: start;
+      width: 100%;
+      margin: auto;
+      max-width: 500px;
+      color: white;
+      animation: slideInUp 1.2s ease-out; /* Sliding animation */
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
+      font-size: 16px;
+    }
+
+    .timer {
+      font-size: 18px;
+      margin-top: 15px;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    li {
+      list-style-type: none; /* Remove bullet points from list items */
+      padding: 0; /* Remove default padding */
+      margin: 0; /* Remove default margin */
+    }
+
+    footer {
+      text-align: center;
+      padding: 2px;
+      color: #ffffff;
+      width: 100%;
+      animation: slideInUp 1.5s ease-out; /* Sliding animation */
+    }
+
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    p {
+      margin: 0px;
+      font-size: large;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      background: linear-gradient(90deg, #11998e, #38ef7d);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 5px 15px rgba(56, 239, 125, 0.5);
+    }
+
+    @keyframes slideInUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes zoomIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.7);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+  <body>
+    <header>
+      <h1 id="exam-name">Exam Portal</h1>
+      <h1 id="timer">00:00</h1>
+    </header>
+    <main>
+      <div id="student-details">
+        <div>
+          <p>Name: <span id="student-name"></span></p>
+          <p>Registration Number: <span id="registration-number"></span></p>
+        </div>
+        <div>
+          <p>Department: <span id="student-department"></span></p>
+          <p>Semester: <span id="semester"></span></p>
+        </div>
+      </div>
+      <hr />
+      <div id="question-container">
+        <h2>Exam Questions</h2>
+        <div id="questions">
+          <!-- Questions will be dynamically added here -->
+        </div>
+      </div>
+      <div style="display: flex;">
+        <button style="margin: auto;" onclick="submitAnswers()">Submit</button>
+      </div>
+    </main>
+    <!--
+    <footer>
+      <p>&copy; 2025 Exam Portal</p>
+    </footer>
+    -->
+  </body>
+  <script>
+    const regno = sessionStorage.getItem("regno");
+    const subcode = sessionStorage.getItem("subcode");
+
+    fetch("/api/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        regno: regno,
+        subcode: subcode,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+        throw new Error("Failed to fetch questions");
+      })
+      .then((data) => {
+        // Update student and exam details
+        document.getElementById("exam-name").textContent = data.exam.name;
+        document.getElementById("student-name").textContent = data.student.name;
+        document.getElementById("student-department").textContent =
+          data.student.department;
+        document.getElementById("registration-number").textContent =
+          data.student.regno;
+        document.getElementById("semester").textContent = data.student.semester;
+
+        // Add questions to the questions container
+        const questionsContainer = document.getElementById("questions");
+        data.questions.forEach((question) => {
+          const questionElement = document.createElement("div");
+          questionElement.innerHTML = `
+            <h3>${question.questionNo}: ${question.questionText}</h3>
+            <ul>
+                ${question.options
+                  .map(
+                    (option) =>
+                      `<li><input type="radio" name="question-${question.questionNo}" value="${option}" required> ${option}</li>`
+                  )
+                  .join("")}
+            </ul>
+        `;
+          questionsContainer.appendChild(questionElement);
+        });
+        
+        const examStartTime = new Date(data.exam.date + 'T' + data.exam.time); // Combine date and time to create a Date object
+        const examEndTime = new Date(examStartTime.getTime() + data.exam.duration * 60000); // Set end time by adding duration in milliseconds
+        const timerContainer = document.getElementById("timer");
+
+        const updateTimer = () => {
+          const now = new Date();
+          const timeRemaining = examEndTime - now;
+
+          if (timeRemaining <= 0) {
+            submitAnswers();
+            clearInterval(timerInterval);
+            return;
+          }
+
+          const minutes = Math.floor(
+            (timeRemaining % (1000 * 60 * 60)) / (1000 * 60)
+          );
+          const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+          timerContainer.textContent = `${minutes}:${String(
+            seconds
+          ).padStart(2, "0")}`;
+        };
+
+        updateTimer(); // Initial call to display the timer immediately
+        const timerInterval = setInterval(updateTimer, 1000); // Update timer every second
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+
+  function submitAnswers() {
+    const answers = [];
+    const questionsContainer = document.getElementById("questions");
+    const questionElements = questionsContainer.querySelectorAll("div");
+
+    questionElements.forEach((questionElement, index) => {
+      const selectedOption = questionElement.querySelector(`input[name="question-${index + 1}"]:checked`);
+      if (selectedOption) {
+        answers.push({
+          questionNo: index + 1,
+          answer: selectedOption.value
+        });
+      }
+    });
+
+    console.log(answers)
+
+    fetch("/api/submit-answers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        regno: regno,
+        subcode: subcode,
+        answers: answers,
+      }),
+    })
+      .then(async(response) => {
+        if (response.status === 200) {
+          window.location.href = '/exam/greet'
+          return;
+        }
+        throw new Error(await response.text());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+  </script>
+
+</html>

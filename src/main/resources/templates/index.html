@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Hub - Online Exam Portal</title>
+    <style>
+        /* Reset and global styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scroll caused by animations */
+        }
+        header {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0px;
+            animation: slideInDown 1s ease-out;
+        }
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: fadeIn 2s;
+        }
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+            color: white;
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s, bounce 1.5s infinite alternate;
+        }
+        p {
+            color: rgb(255, 255, 255);
+            margin-bottom: 30px;
+            animation: fadeIn 3s;
+        }
+        #btn-container {
+            width: 230px;
+        }
+        .start-button, .check-result {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: white;
+            font-size: 20px;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            width: 100%;
+            outline: none;
+            margin-bottom: 20px;
+            animation: zoomIn 1s ease-out;
+        }
+        .start-button:hover, .check-result:hover {
+            transform: scale(1.1);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.5);
+        }
+        .rules-section {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 800px;
+            animation: fadeInUp 1.5s ease-out;
+        }
+        footer {
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+        /* Keyframes for animations */
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .logo {
+                font-size: 22px;
+            }
+            .start-button, .check-result {
+                font-size: 16px;
+                padding: 10px 30px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Exam Hub</div>
+    </header>
+    <main>
+        <h1>WELCOME TO EXAM HUB</h1>
+        <p>Your Ultimate Platform for Seamless and Secure Online Assessments.</p>
+        <div id="btn-container">
+            <button class="start-button" onclick="startExam()">Search&nbsp;Exam</button>
+            <button class="check-result" onclick="checkResult()">Check&nbsp;Result</button>
+        </div>
+        <div class="rules-section">
+            <h3>Rules and Guidelines</h3>
+            <ul style="text-align: start; margin-block-start: 0px; padding-inline-start: 20px;">
+                <li>Ensure a stable internet connection before starting the exam.</li>
+                <li>Avoid refreshing or closing the browser during the exam session.</li>
+                <li>Answer all questions within the allotted time.</li>
+                <li>Keep your ID verification details ready for any proctored exams.</li>
+            </ul>
+        </div>
+        <div style="margin-top: 30px; color: white; text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); font-size: 18px; animation: fadeIn 2.5s;">
+            <p>"An exam is just a chance to show your effort and growth. Stay calm, stay confident, and give it your best—you’ve got this!"</p>
+        </div>
+    </main>
+    <footer>
+        &copy; 2025 Exam Hub. All rights reserved.
+    </footer>
+    <script>
+        function startExam() {
+            window.location.href = '/exam/student-details';
+        }
+        function checkResult() {
+            window.location.href = "/result";
+        }
+    </script>
+</body>
+</html>

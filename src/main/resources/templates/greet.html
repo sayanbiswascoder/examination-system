@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You Page</title>
+  <style>
+    /* General Body Styling */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1f4037, #99f2c8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Container Styling */
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      width: 400px;
+      text-align: center;
+      position: relative;
+      animation: slideIn 1.5s ease-out forwards;
+    }
+
+    /* Sliding Animation */
+    @keyframes slideIn {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Heading Styling */
+    h1 {
+      color: #ffffff;
+      margin-bottom: 20px;
+      font-size: 32px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    /* Paragraph Styling */
+    p {
+      color: #ffffff;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    /* Button Styling */
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      background: linear-gradient(90deg, #11998e, #38ef7d);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      outline: none;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0px 5px 15px rgba(56, 239, 125, 0.5);
+    }
+
+  @media (max-width: 600px) {
+    .container {
+      width: auto;
+    }
+
+    h1 {
+      font-size: 24px; /* Smaller heading font size */
+    }
+
+    p {
+      font-size: 16px; /* Smaller paragraph font size */
+    }
+
+    button {
+      width: 100%; /* Make button full width */
+      padding: 10px; /* Adjust padding for smaller screens */
+      font-size: 14px; /* Smaller button font size */
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>THANK YOU</h1>
+    <p>YOUR EXAM HAS ENDED</p>
+    <p>BEST WISHES FOR YOUR FUTURE !</p>
+    <button onclick="goHome()">Go to Home Page</button>
+  </div>
+
+  <script>
+    function goHome() {
+      // Redirect to home page
+      window.location.href = "/"; // Replace with your actual home page file
+    }
+  </script>
+</body>
+</html>
