@@ -25,7 +25,7 @@ The Examination System is a web application designed to manage and facilitate th
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/examination-system.git
+   git clone https://github.com/sayanbiswascoder/examination-system.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -41,7 +41,7 @@ The Examination System is a web application designed to manage and facilitate th
    ```
 
 ### Accessing the Application
-Once the application is running, you can access it at `http://localhost:8080`.
+Once the application is running, you can access it at `http://127.0.0.1:8080`.
 
 ## Usage
 - Navigate to the home page to view upcoming exams.
